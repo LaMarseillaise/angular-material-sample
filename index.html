@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-Do List</title>
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  </head>
+  <body ng-app="AngularMaterialSample" ng-cloak>
+    <layout>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <span>To Do List</span>
+
+          <span flex></span>
+
+          <md-button>
+            Andur Carr
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-content ng-controller="TodoCtrl" class="md-padding" flex="none">
+        <form name="activity" ng-submit="createActivity()" layout-align="center end">
+          <md-input-container>
+            <label>Title</label>
+            <input name="title" ng-model="title" required>
+          </md-input-container>
+
+          <md-input-container>
+            <label>Description</label>
+            <textarea name="description" ng-model="description" required></textarea>
+          </md-input-container>
+
+          <md-button type="submit" class="md-primary" aria-label="Add To Do Item">
+            Add
+          </md-button>
+        </form>
+
+        <md-checkbox ng-model="filters.completed" ng-true-value="false" ng-false-value="undefined">
+          Hide Completed Items
+        </md-checkbox>
+
+        <md-card ng-repeat="activity in activities | filter:filters">
+          <md-card-header>
+            <md-checkbox ng-model="activity.completed" aria-label="Completed"></md-checkbox>
+            <md-card-header-text>
+              <span class="md-title">{{ activity.title }}</span>
+              <span class="md-subhead">{{ activity.description }}</span>
+            </md-card-header-text>
+            <md-button ng-click="deleteActivity(activity)">Delete</md-button>
+          </md-card-header>
+        </md-card>
+      </md-content>
+    </layout>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
